@@ -83,7 +83,7 @@ func (rows Table) Sizes() (sizes TableSizes) {
 	return sizes
 }
 
-func (row Table) Sprint(sizes RowSizes, maxSizes []int, maxRowWidth int, maxWidth int) (output string) {
+func (row Table) sprint(sizes RowSizes, maxSizes []int, maxRowWidth int, maxWidth int) (output string) {
 	output = ""
 	output2 := ""
 	total := float64(maxWidth - maxRowWidth)
@@ -125,6 +125,10 @@ func iif(cond bool, value interface{}, value2 interface{}) interface{} {
 }
 
 func (table Table) Print() {
+	fmt.Print(table.Sprint())
+}
+
+func (table Table) Sprint() (result string){
 	sizes := table.Sizes()
 	//fmt.Println(table)
 	//fmt.Println("=>", sizes)
@@ -133,7 +137,7 @@ func (table Table) Print() {
 	for i, row := range table {
 		switch row := row.(type) {
 		case Table:
-			output = row.Sprint(sizes.rows[i], sizes.maxSizes[sizes.rows[i].maxIndex], sizes.maxRowWidth[sizes.rows[i].maxIndex], sizes.maxWidth)
+			output = row.sprint(sizes.rows[i], sizes.maxSizes[sizes.rows[i].maxIndex], sizes.maxRowWidth[sizes.rows[i].maxIndex], sizes.maxWidth)
 		default:
 			output = fmt.Sprint("│" + fmt.Sprint(row) + "│")
 		}
@@ -172,9 +176,9 @@ func (table Table) Print() {
 			} else {
 				sep2=sep
 			}
-			fmt.Println(sep2)
+			result += fmt.Sprintln(sep2)
 		}
-		fmt.Println(output)
+		result += fmt.Sprintln(output)
 		prevOutput = output
 	}
 	prevRunes := []rune(prevOutput)
@@ -190,5 +194,6 @@ func (table Table) Print() {
 			sep2 += "─"
 		}
 	}
-	fmt.Println(sep2)
+	result += fmt.Sprintln(sep2)
+	return result
 }

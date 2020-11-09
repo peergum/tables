@@ -8,7 +8,11 @@ This Go package helps you present rows and columns in tables in a nice text way
 
 ## examples
 ### example 1
-`Table{Table{1, "a", 3.1}}`
+```
+Table{
+    Table{1, "a", 3.1}
+}
+```
 ```
 ╭───┬───┬─────╮
 │ 1 │ a │ 3.1 │
@@ -16,7 +20,16 @@ This Go package helps you present rows and columns in tables in a nice text way
 ```
 
 ### Example 2
-`Table{Table{12,2,3,3.1},Table{4,"something",6},Table{"a","b","c"},Table{1,2},Table{12,13,14},Table{1,2,4}}`
+```
+Table{
+ 	Table{12, 2, 3, 3.1},
+ 	Table{4, "something", 6},
+ 	Table{"a", "b", "c"},
+ 	Table{1, 2},
+ 	Table{12, 13, 14},
+ 	Table{1, 2, 4},
+}
+```
 ```
 ╭────┬───┬───┬──────╮
 │ 12 │ 2 │ 3 │ 3.1  │
