@@ -17,6 +17,7 @@ type rowSizes struct {
 	rowWidth int
 	colWidth []int
 }
+
 type tableSizes struct {
 	numRows     int
 	maxWidth    int
@@ -24,6 +25,8 @@ type tableSizes struct {
 	maxSizes    maxSizes
 	maxRowWidth []int
 }
+
+var Separator Table = Table{}
 
 func (rows Table) sizes() (sizes tableSizes) {
 	sizes.numRows = len(rows)
@@ -137,6 +140,9 @@ func (table Table) Sprint() (result string) {
 	for i, row := range table {
 		switch row := row.(type) {
 		case Table:
+			if len(row) == 0 {
+				continue
+			}
 			output = row.sprint(sizes.rows[i], sizes.maxSizes[sizes.rows[i].maxIndex], sizes.maxRowWidth[sizes.rows[i].maxIndex], sizes.maxWidth)
 		default:
 			output = fmt.Sprint("│" + fmt.Sprint(row) + "│")
