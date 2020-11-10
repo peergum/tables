@@ -40,3 +40,15 @@ func ExampleSimple() {
 	//│  1  │  2  │   4   │
 	//╰─────┴─────┴───────╯
 }
+
+func ExampleTable_AddRow() {
+	table:= Table{Table{1,1,1,1}}
+	table.AddRow(Table{1,2,3})
+	table.Print()
+	//Output:
+	//╭───┬───┬───┬───╮
+	//│ 1 │ 1 │ 1 │ 1 │
+	//├───┴┬──┴─┬─┴───┤
+	//│ 1  │ 2  │  3  │
+	//╰────┴────┴─────╯
+}

@@ -128,9 +128,8 @@ func (table Table) Print() {
 	fmt.Print(table.Sprint())
 }
 
-func (table Table) AddRow(row Table) Table {
-	table = append(table, row)
-	return table
+func (table *Table) AddRow(row Table) {
+	*table = append(*table, row)
 }
 
 func (table Table) Sprint() (result string) {
