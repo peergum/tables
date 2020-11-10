@@ -128,7 +128,12 @@ func (table Table) Print() {
 	fmt.Print(table.Sprint())
 }
 
-func (table Table) Sprint() (result string){
+func (table Table) AddRow(row Table) Table {
+	table = append(table, row)
+	return table
+}
+
+func (table Table) Sprint() (result string) {
 	sizes := table.Sizes()
 	//fmt.Println(table)
 	//fmt.Println("=>", sizes)
