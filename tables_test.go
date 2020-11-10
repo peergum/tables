@@ -54,8 +54,13 @@ func ExampleTable_AddRow() {
 }
 
 func ExampleTestSeparator() {
-	table:=Table{Table{1,2,3},Separator,Table{4,5,6}}
+	table:=Table{Table{11,2,3},Separator,Table{4,5,66}}
 	table.Print()
 	//Output:
+	//╭────┬───┬────╮
+	//│ 11 │ 2 │ 3  │
+	//├────┼───┼────┤
+	//│ 4  │ 5 │ 66 │
+	//╰────┴───┴────╯
 
 }

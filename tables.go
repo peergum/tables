@@ -40,6 +40,9 @@ func (rows Table) sizes() (sizes tableSizes) {
 		width := 0
 		switch row := row.(type) {
 		case Table:
+			if len(row) == 0 {
+				continue
+			}
 			sizes.rows[i].numCols = len(row)
 			sizes.rows[i].colWidth = make([]int, sizes.rows[i].numCols)
 			cols = len(row)
