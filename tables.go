@@ -6,32 +6,28 @@ import (
 	"strings"
 )
 
-//type Row interface{}
+// Table type
 type Table []interface{}
 
-type MaxSizes [][]int
+type maxSizes [][]int
 
-type RowSizes struct {
+type rowSizes struct {
 	maxIndex int
 	numCols  int
 	rowWidth int
 	colWidth []int
 }
-type TableSizes struct {
+type tableSizes struct {
 	numRows     int
 	maxWidth    int
-	rows        []RowSizes
-	maxSizes    MaxSizes
+	rows        []rowSizes
+	maxSizes    maxSizes
 	maxRowWidth []int
 }
 
-func (table Table) Size() int {
-	return len(table)
-}
-
-func (rows Table) Sizes() (sizes TableSizes) {
+func (rows Table) sizes() (sizes tableSizes) {
 	sizes.numRows = len(rows)
-	sizes.rows = make([]RowSizes, sizes.numRows)
+	sizes.rows = make([]rowSizes, sizes.numRows)
 	sizes.maxSizes = make([][]int, sizes.numRows)
 	sizes.maxRowWidth = make([]int, sizes.numRows)
 	maxIndex := -1
@@ -83,7 +79,7 @@ func (rows Table) Sizes() (sizes TableSizes) {
 	return sizes
 }
 
-func (row Table) sprint(sizes RowSizes, maxSizes []int, maxRowWidth int, maxWidth int) (output string) {
+func (row Table) sprint(sizes rowSizes, maxSizes []int, maxRowWidth int, maxWidth int) (output string) {
 	output = ""
 	output2 := ""
 	total := float64(maxWidth - maxRowWidth)
@@ -133,7 +129,7 @@ func (table *Table) AddRow(row Table) {
 }
 
 func (table Table) Sprint() (result string) {
-	sizes := table.Sizes()
+	sizes := table.sizes()
 	//fmt.Println(table)
 	//fmt.Println("=>", sizes)
 	var output string
